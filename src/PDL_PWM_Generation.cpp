@@ -20,14 +20,14 @@ float calculate_duty_cycle_error(float actual_duty_cycle, float target_duty_cycl
 int pwm_gen_init(uint8_t pin, float frequency, float duty_cycle) {
   // Step 1: Check if duty_cycle is between 0 and 1
   if (duty_cycle < 0.0f || duty_cycle > 1.0f) {
-    Serial.println("Error: Duty cycle must be between 0 and 1");
+    Serial.printf("Error: Duty cycle must be between 0 and 1, provided: %f\n", duty_cycle);
     return -1;
   }
 
   // Step 2: Find the best prescaler for the target frequency
   int8_t prescaler_shift = find_best_prescaler(frequency);
   if (prescaler_shift == -1) {
-    Serial.println("Error: Invalid frequency");
+    Serial.printf("Error: Invalid frequency: %f\n", frequency);
     return -1;
   }
 
